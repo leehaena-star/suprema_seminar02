@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>식수관리 시스템 - 로그인</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Pretendard:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <!-- 로그인 제목 -->
+        <h1 class="login-title" style="color: #ffffff;">식수관리 시스템</h1>
+
+        <!-- 로그인 폼 -->
+        <form class="login-form" style="width: 100%; display: flex; flex-direction: column; gap: 12px;">
+            <!-- 아이디 입력 -->
+            <div class="login-input-wrapper">
+                <input type="text" class="login-input" placeholder="아이디" id="username" name="username" required>
+                <button class="login-input-clear" type="button" aria-label="입력 삭제"></button>
+              </div>
+              
+
+            <!-- 비밀번호 입력 -->
+            <div class="login-input-wrapper">
+                <input type="password" class="login-input" placeholder="비밀번호" id="password" name="password" required>
+                <button class="login-input-clear" type="button" aria-label="입력 삭제"></button>
+            </div>
+
+            <!-- 로그인 유지 체크박스 -->
+            <div style="display: flex; align-items: center; gap: 8px; margin: 8px 0;">
+                <label class="checkbox">
+                    <input type="checkbox" id="keepLogin" name="keepLogin">
+                    <span class="custom-checkbox"></span>
+                </label>
+                <label for="keepLogin" style="color: #ffffff; font-size: 14px; cursor: pointer;">로그인 유지</label>
+            </div>
+
+            <!-- 로그인 버튼 -->
+            <button type="submit" class="login-btn">로그인</button>
+        </form>
+
+        <!-- 비밀번호 찾기 링크 -->
+        <a href="#" class="login-footer" style="text-decoration: none; color: #ffffff; font-size: 14px;">비밀번호를 잊으셨나요?</a>
+    </div>
+
+    <!-- 하단 로고 -->
+    <img src="images/ic_login_logo.png" alt="Suprema 로고" class="login-logo">
+
+    <script src="js/main.js"></script>
+    <script>
+        // 로그인 폼 처리
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.querySelector('.login-form');
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+
+            // 폼 제출 이벤트 처리
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault(); // 기본 폼 제출 방지
+
+                const username = usernameInput.value.trim();
+                const password = passwordInput.value.trim();
+
+                // 로그인 검증
+                if (username === 'suprema' && password === 'suprema123') {
+                    // 로그인 성공 - sub_01.html로 이동
+                    window.location.href = 'sub_01.html';
+                } else {
+                    // 로그인 실패 - 에러 메시지 표시
+                    alert('아이디 또는 비밀번호가 올바르지 않습니다.');
+
+                    // 입력 필드 초기화
+                    passwordInput.value = '';
+                    usernameInput.focus();
+                }
+            });
+
+            // Enter 키로 로그인 처리
+            [usernameInput, passwordInput].forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        loginForm.dispatchEvent(new Event('submit'));
+                    }
+                });
+            });
+
+            // 입력 필드 클리어 버튼 기능
+            const clearButtons = document.querySelectorAll('.login-input-clear');
+            clearButtons.forEach((button, index) => {
+                const input = index === 0 ? usernameInput : passwordInput;
+
+                // 입력값이 있을 때만 클리어 버튼 표시
+                input.addEventListener('input', function() {
+                    if (this.value.length > 0) {
+                        button.style.display = 'block';
+                    } else {
+                        button.style.display = 'none';
+                    }
+                });
+
+                // 클리어 버튼 클릭 시 입력값 삭제
+                button.addEventListener('click', function() {
+                    input.value = '';
+                    input.focus();
+                    button.style.display = 'none';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

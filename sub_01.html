@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>식수관리</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="./css/layout.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+
+<body>
+  <div class="layout">
+    <!--header-->
+    <header class="layout-header">
+      <div class="header-title">식수관리시스템</div>
+      <button class="btn-logout" title="로그아웃"></button>
+    </header>
+    <!--lnb+contents-->
+    <div class="layout-main">
+      <!--lnb-->
+      <aside class="layout-lnb">
+        <ul class="lnb-menu">
+          <li class="lnb-item">
+            <a href="sub_01.html" class="lnb-button active">대시 보드</a>
+          </li>
+          <li class="lnb-item">
+            <a href="sub_02.html" class="lnb-button">식사 관리</a>
+          </li>
+          <li class="lnb-item">
+            <a href="sub_03.html" class="lnb-button">정산 관리</a>
+          </li>
+          <li class="lnb-item">
+            <a href="sub_04.html" class="lnb-button">사용자 관리</a>
+          </li>
+          <li class="lnb-item">
+            <a href="sub_05.html" class="lnb-button">시스템 설정</a>
+          </li>
+        </ul>
+      </aside>
+      
+      
+      <!--Contents-->
+      <main class="layout-content">
+        <h1>Dashboard</h1>
+        <div class="dashboard-container">
+          <!-- 상단 3개 영역 -->
+          <div class="dashboard-top">
+
+            <!-- 좌측: 실시간 식사 인원 -->
+            <section class="realtime-section">
+              <div class="realtime-header">
+                <div>
+                  <div class="realtime-title">실시간 식사 인원</div>
+                  <div class="realtime-date">-</div> <!-- JS에서 시간 삽입 -->
+                </div>
+                <button class="reset-btn" title="리셋" aria-label="리셋"></button>
+              </div>
+
+              <div class="meal-cards-vertical">
+                <!-- 조식 -->
+                <div class="meal-row">
+                  <div class="meal-type">조식</div>
+                  <div class="meal-status">
+                    <!-- JS에서 badge + 인원수 삽입 -->
+                    <span class="meal-count-text">-</span>
+                  </div>
+                </div>
+
+                <!-- 중식 -->
+                <div class="meal-row">
+                  <div class="meal-type">중식</div>
+                  <div class="meal-status">
+                    <!-- JS에서 badge + 인원수 삽입 -->
+                    <span class="meal-count-text">-</span>
+                  </div>
+                </div>
+
+                <!-- 석식 -->
+                <div class="meal-row">
+                  <div class="meal-type">석식</div>
+                  <div class="meal-status">
+                    <!-- JS에서 badge + 인원수 삽입 -->
+                    <span class="meal-count-text">-</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+
+
+            <!-- 중앙: 식사 시간별 인원 -->
+            <section class="chart-section" data-breakfast="34" data-lunch="213" data-dinner="160">
+              <div class="chart-header">
+                <div class="chart-title-group">
+                  <div class="chart-title">식사 시간별 인원</div>
+                  <div class="realtime-date">2025.05</div>
+                </div>
+                <div class="text-select-wrapper">
+                  <button class="text-select-button down" onclick="toggleTextSelect(this)">
+                    월별 <span class="icon"></span>
+                  </button>
+                  <ul class="text-select-options">
+                    <li class="selected">월별</li>
+                    <li>주별</li>
+                    <li>일별</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="chart-container">
+                <div class="donut-chart" id="donutChart">
+                  <svg viewBox="0 0 200 200" id="donutSvg">
+                    <!-- 도넛 차트는 JavaScript로 동적 생성 -->
+                  </svg>
+
+                  <!-- 도넛 위 인원 수 텍스트 (JavaScript로 동적 생성) -->
+                  <div id="donutValues"></div>
+
+                  <!-- 도넛 중앙 텍스트 -->
+                  <div class="donut-center">
+                    <div class="donut-label">월별 평균</div>
+                    <div class="donut-total" id="totalCount">407명</div>
+                  </div>
+                </div>
+
+                <!-- 범례 -->
+                <div class="chart-legend">
+                  <div class="legend-item">
+                    <div class="legend-info">
+                      <div class="legend-color breakfast"></div>
+                      <div class="legend-text-group">
+                        <div class="legend-text">조식</div>
+                        <div class="legend-subtext">07:00~09:00<br />9,000원</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-info">
+                      <div class="legend-color lunch"></div>
+                      <div class="legend-text-group">
+                        <div class="legend-text">중식</div>
+                        <div class="legend-subtext">11:30~13:00<br />9,000원</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-info">
+                      <div class="legend-color dinner"></div>
+                      <div class="legend-text-group">
+                        <div class="legend-text">석식</div>
+                        <div class="legend-subtext">17:00~19:00<br />9,000원</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+
+            <!-- 우측: 부서별 식사 -->
+            <section class="department-section">
+              <div class="department-header">
+                <div class="department-header-left">
+                  <div class="department-title">부서별 식사</div>
+                  <div class="department-date">2025.05.04 ~ 2025.05.10</div>
+                </div>
+                <div class="department-header-right">
+                  <div class="text-select-wrapper">
+                    <button class="text-select-button down" onclick="toggleTextSelect(this)">
+                      월별 <span class="icon"></span>
+                    </button>
+                    <ul class="text-select-options">
+                      <li class="selected">월별</li>
+                      <li>주별</li>
+                      <li>일별</li>
+                    </ul>
+                  </div>
+                  <button class="department-next-btn" title="다음" aria-label="다음"></button>
+                </div>
+              </div>
+
+              <div class="department-list" id="departmentList">
+                <!-- ✅ 개발 데이터로 JS가 채워줌 -->
+              </div>
+            </section>
+          </div>
+
+          <!-- 하단 차트 영역 -->
+          <div class="dashboard-bottom">
+
+            <!-- 이달의 식사 횟수 -->
+            <section class="line-chart-section">
+              <div class="line-chart-header">
+                <div class="line-chart-title">이달의 식사 횟수</div>
+                <div class="line-chart-stats">
+                  <div class="line-chart-group1">
+                    <span class="line-chart-number" id="mealCountTotal">0</span>
+                    <span class="line-chart-unit">회</span>
+                  </div>
+                  <div class="line-chart-group2">
+                    <span class="line-chart-label">전월대비</span>
+                    <span class="line-chart-change" id="mealCountChange">-</span>
+                  </div>
+                </div>
+              </div>
+              <div class="line-chart-container">
+                <canvas id="chartMealCount"></canvas>
+              </div>
+            </section>
+
+            <!-- 이달의 식사 비용 -->
+            <section class="line-chart-section">
+              <div class="line-chart-header">
+                <div class="line-chart-title">이달의 식사 비용</div>
+                <div class="line-chart-stats" id="mealCostStats">
+                  <div class="line-chart-group1">
+                    <span class="line-chart-number" id="mealCostTotal">0</span>
+                    <span class="line-chart-unit">원</span>
+                  </div>
+                  <div class="line-chart-group2">
+                    <span class="line-chart-label">전월대비</span>
+                    <span class="line-chart-change" id="mealCostChange"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="line-chart-container">
+                <canvas id="chartMealCost"></canvas>
+              </div>
+            </section>
+
+            <!--툴팁-->
+            <div id="chartTooltip" class="chart-tooltip" style="opacity: 0;"></div>
+
+          </div>
+
+
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/main.js"></script>
+
+  
+
+</body>
+
+</html>

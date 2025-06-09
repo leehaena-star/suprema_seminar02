@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+</html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>식수관리</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="./css/layout.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+
+<body>
+  <div class="layout">
+    <!--header-->
+    <header class="layout-header">
+      <div class="header-title">식수관리시스템</div>
+      <button class="btn-logout" title="로그아웃"></button>
+    </header>
+    <!--lnb+contents-->
+    <div class="layout-main">
+      <!--lnb-->
+      <aside class="layout-lnb">
+        <ul class="lnb-menu">
+          <li class="lnb-item">
+            <a href="sub_01.html" class="lnb-button">대시 보드</a>
+          </li>
+          <li class="lnb-item">
+            <a href="sub_02.html" class="lnb-button">식사 관리</a>
+          </li>
+          <li class="lnb-item">
+            <a href="sub_03.html" class="lnb-button">정산 관리</a>
+          </li>
+          <li class="lnb-item">
+            <a href="sub_04.html" class="lnb-button active">사용자 관리</a>
+          </li>
+          <li class="lnb-item">
+            <a href="sub_05.html" class="lnb-button">시스템 설정</a>
+          </li>
+        </ul>
+      </aside>
+
+      <!--Contents-->
+      <main class="layout-content">
+        <section class="search-section">
+
+          <!-- 🔸 0줄: 타이틀 + 신규등록 버튼 -->
+          <div class="search-section-header">
+            <!--<div class="search-group search-left">
+              <div class="search-section-header-text">타이틀명</div>
+            </div>-->
+            <div class="search-group search-right">
+              <button class="button button-m button-base-outline button-outline-primary" type="button">
+                <span>신규 등록</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 🔸 1줄: 좌측 영역-->
+          <div class="search-group-container">
+            <div class="search-group search-left">
+              <div class="search-wrapper" id="searchWrap">
+                <input type="text" class="search-input" id="searchInput" placeholder="검색어를 입력하세요.">
+                <button class="search-reset-btn" id="resetBtn">
+                  <img src="./images/ic_delete_24.png" alt="초기화">
+                </button>
+                <button class="search-btn"></button>
+              </div>
+
+              <!--부서별 -->
+              <div class="custom-select-wrapper w-160" data-filter-type="department">
+                <div class="custom-select">
+                  <span class="selected-value">전체 부서</span>
+                </div>
+                <ul class="select-options">
+                  <li class="selected">전체 부서</li>
+                  <li>인사팀</li>
+                  <li>총무팀</li>
+                  <li>응용개발팀</li>
+                  <li>기술개발팀</li>
+                  <li>마케팅팀</li>
+                  <li>경영기획팀</li>
+                  <li>디자인팀</li>
+                  <li>프로덕트팀</li>
+                  <li>개발팀</li>
+                </ul>
+              </div>
+
+              <!--권한여부-->
+              <div class="custom-select-wrapper w-160" data-filter-type="authority">
+                <div class="custom-select">
+                  <span class="selected-value">모든 권한</span>
+                </div>
+                <ul class="select-options">
+                  <li class="selected">모든 권한</li>
+                  <li>총괄 관리자</li>
+                  <li>관리자</li>
+                  <li>사용자</li>
+                </ul>
+              </div>
+
+              <!--사용여부-->
+              <div class="custom-select-wrapper w-120" data-filter-type="usage">
+                <div class="custom-select">
+                  <span class="selected-value">전체 사용</span>
+                </div>
+                <ul class="select-options">
+                  <li class="selected">전체 사용</li>
+                  <li>사용</li>
+                  <li>미사용</li>
+                </ul>
+              </div>
+
+
+              <button class="button button-m button-icon-only button-outline-gray" type="button" id="filterResetBtn">
+                <img class="icon" src="images/ic_reset_enabled_30.png" alt="필터 초기화" />
+              </button>
+            </div>
+          </div>
+
+          <!-- 3줄 우측 -->
+          <div class="search-group-container search-group-container--third">
+            <div class="search-group search-left">
+              <!-- 왼쪽 여백 or 필터 등 -->
+              <p>사용자 관리</p> <!--text 아래로 내리려면 <p style="margin-top: 4px;">테이블 명칭</p>-->
+            </div>
+            <div class="search-group search-right">
+              <div class="text-select-wrapper w-100" id="textSelect2">
+                <button class="text-select-button down" type="button">
+                  정렬 <span class="icon"></span>
+                </button>
+                <ul class="text-select-options">
+                  <li class="selected">최신순</li>
+                  <li>오래된순</li>
+                  <li>이름순</li>
+                </ul>
+              </div>
+              <div class="text-select-wrapper w-80" id="textSelect2">
+                <button class="text-select-button down" type="button">
+                  10개씩 <span class="icon"></span>
+                </button>
+                <ul class="text-select-options">
+                  <li class="selected">10개씩</li>
+                  <li>50개씩</li>
+                  <li>100개씩</li>
+                </ul>
+              </div>
+              <button class="button button-s button-outline-gray">
+                <img class="icon" src="images/ic_download_24.png" alt="다운로드 아이콘" />
+                <span>엑셀 다운로드</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- table 영역 -->
+        <div class="table-wrapper">
+          <table class="table" data-table-type="user">
+            <thead>
+              <tr>
+                <th>
+                  <div class="th-inner">코드</div>
+                </th>
+                <th>
+                  <div class="th-inner">ID</div>
+                </th>
+                <th>
+                  <div class="th-inner">부서</div>
+                </th>
+                <th>
+                  <div class="th-inner">이름</div>
+                </th>
+                <th class="sortable">
+                  <div class="th-inner">
+                    <span class="th-label">권한</span>
+                    <span class="sort-icon default"></span>
+                  </div>
+                </th>
+                <th>
+                  <div class="th-inner">사용 여부</div>
+                </th>
+                <th>
+                  <div class="th-inner">메모</div>
+                </th>
+                <th>
+                  <div class="th-inner">관리</div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-grey">
+                <td>01</td>
+                <td>AdminID</td>
+                <td data-filter-type="department">인사팀</td>
+                <td>김희진</td>
+                <td data-filter-type="authority">
+                  <div class="text-select-wrapper w-120">
+                    <button class="text-select-button down" type="button">
+                      총괄 관리자 <span class="icon"></span>
+                    </button>
+                    <ul class="text-select-options">
+                      <li class="selected">총괄 관리자</li>
+                      <li>관리자</li>
+                      <li>사용자</li>
+                    </ul>
+                  </div>
+                </td>
+                <td data-filter-type="usage">
+                  <span class="badge badge-used">사용</span>
+                </td>
+                <td>
+                  <div class="table-input-wrapper">
+                    <input type="text" class="table-input" placeholder="입력하세요" />
+                    <button class="table-input-clear"></button>
+                  </div>
+                </td>
+                <td>
+                  <button class="button button-xs button-outline-gray">삭제</button>
+                </td>
+              </tr>
+              <tr class="row-white">
+                <td>02</td>
+                <td>UserID</td>
+                <td data-filter-type="department">응용개발팀</td>
+                <td>홍길동</td>
+                <td data-filter-type="authority">
+                  <div class="text-select-wrapper w-120">
+                    <button class="text-select-button down" type="button">
+                      관리자 <span class="icon"></span>
+                    </button>
+                    <ul class="text-select-options">
+                      <li>총괄 관리자</li>
+                      <li class="selected">관리자</li>
+                      <li>사용자</li>
+                    </ul>
+                  </div>
+                </td>
+                <td data-filter-type="usage">
+                  <span class="badge badge-unused">미사용</span>
+                </td>
+                <td>
+                  <div class="table-input-wrapper">
+                    <input type="text" class="table-input" placeholder="입력하세요" />
+                    <button class="table-input-clear"></button>
+                  </div>
+                </td>
+                <td>
+                  <button class="button button-xs button-outline-gray">삭제</button>
+                </td>
+              </tr>
+              <tr class="row-grey">
+                <td>03</td>
+                <td>AdminID</td>
+                <td data-filter-type="department">마케팅팀</td>
+                <td>김희진</td>
+                <td data-filter-type="authority">
+                  <div class="text-select-wrapper w-120">
+                    <button class="text-select-button down" type="button">
+                      총괄 관리자 <span class="icon"></span>
+                    </button>
+                    <ul class="text-select-options">
+                      <li class="selected">총괄 관리자</li>
+                      <li>관리자</li>
+                      <li>사용자</li>
+                    </ul>
+                  </div>
+                </td>
+                <td data-filter-type="usage">
+                  <span class="badge badge-used">사용</span>
+                </td>
+                <td>
+                  <div class="table-input-wrapper">
+                    <input type="text" class="table-input" placeholder="입력하세요" />
+                    <button class="table-input-clear"></button>
+                  </div>
+                </td>
+                <td>
+                  <button class="button button-xs button-outline-gray">삭제</button>
+                </td>
+              </tr>
+              <tr class="row-white">
+                <td>04</td>
+                <td>UserID</td>
+                <td data-filter-type="department">총무팀</td>
+                <td>홍길동</td>
+                <td data-filter-type="authority">
+                  <div class="text-select-wrapper w-120">
+                    <button class="text-select-button down" type="button">
+                      관리자 <span class="icon"></span>
+                    </button>
+                    <ul class="text-select-options">
+                      <li>총괄 관리자</li>
+                      <li class="selected">관리자</li>
+                      <li>사용자</li>
+                    </ul>
+                  </div>
+                </td>
+                <td data-filter-type="usage">
+                  <span class="badge badge-unused">미사용</span>
+                </td>
+                <td>
+                  <div class="table-input-wrapper">
+                    <input type="text" class="table-input" placeholder="입력하세요" />
+                    <button class="table-input-clear"></button>
+                  </div>
+                </td>
+                <td>
+                  <button class="button button-xs button-outline-gray">삭제</button>
+                </td>
+              </tr>
+              <tr class="row-grey">
+                <td>05</td>
+                <td>AdminID</td>
+                <td data-filter-type="department">인사팀</td>
+                <td>김희진</td>
+                <td data-filter-type="authority">
+                  <div class="text-select-wrapper w-120">
+                    <button class="text-select-button down" type="button">
+                      총괄 관리자 <span class="icon"></span>
+                    </button>
+                    <ul class="text-select-options">
+                      <li class="selected">총괄 관리자</li>
+                      <li>관리자</li>
+                      <li>사용자</li>
+                    </ul>
+                  </div>
+                </td>
+                <td data-filter-type="usage">
+                  <span class="badge badge-used">사용</span>
+                </td>
+                <td>
+                  <div class="table-input-wrapper">
+                    <input type="text" class="table-input" placeholder="입력하세요" />
+                    <button class="table-input-clear"></button>
+                  </div>
+                </td>
+                <td>
+                  <button class="button button-xs button-outline-gray">삭제</button>
+                </td>
+              </tr>
+              <tr class="row-white">
+                <td>06</td>
+                <td>UserID</td>
+                <td data-filter-type="department">응용개발팀</td>
+                <td>홍길동</td>
+                <td data-filter-type="authority">
+                  <div class="text-select-wrapper w-120">
+                    <button class="text-select-button down" type="button">
+                      관리자 <span class="icon"></span>
+                    </button>
+                    <ul class="text-select-options">
+                      <li>총괄 관리자</li>
+                      <li class="selected">관리자</li>
+                      <li>사용자</li>
+                    </ul>
+                  </div>
+                </td>
+                <td data-filter-type="usage">
+                  <span class="badge badge-unused">미사용</span>
+                </td>
+                <td>
+                  <div class="table-input-wrapper">
+                    <input type="text" class="table-input" placeholder="입력하세요" />
+                    <button class="table-input-clear"></button>
+                  </div>
+                </td>
+                <td>
+                  <button class="button button-xs button-outline-gray">삭제</button>
+                </td>
+              </tr>
+              <tr class="row-grey">
+                <td>07</td>
+                <td>AdminID</td>
+                <td data-filter-type="department">경영기획팀</td>
+                <td>김희진</td>
+                <td data-filter-type="authority">
+                  <div class="text-select-wrapper w-120">
+                    <button class="text-select-button down" type="button">
+                      총괄 관리자 <span class="icon"></span>
+                    </button>
+                    <ul class="text-select-options">
+                      <li class="selected">총괄 관리자</li>
+                      <li>관리자</li>
+                      <li>사용자</li>
+                    </ul>
+                  </div>
+                </td>
+                <td data-filter-type="usage">
+                  <span class="badge badge-used">사용</span>
+                </td>
+                <td>
+                  <div class="table-input-wrapper">
+                    <input type="text" class="table-input" placeholder="입력하세요" />
+                    <button class="table-input-clear"></button>
+                  </div>
+                </td>
+                <td>
+                  <button class="button button-xs button-outline-gray">삭제</button>
+                </td>
+              </tr>
+              <tr class="row-white">
+                <td>08</td>
+                <td>UserID</td>
+                <td data-filter-type="department">디자인팀</td>
+                <td>홍길동</td>
+                <td data-filter-type="authority">
+                  <div class="text-select-wrapper w-120">
+                    <button class="text-select-button down" type="button">
+                      관리자 <span class="icon"></span>
+                    </button>
+                    <ul class="text-select-options">
+                      <li>총괄 관리자</li>
+                      <li class="selected">관리자</li>
+                      <li>사용자</li>
+                    </ul>
+                  </div>
+                </td>
+                <td data-filter-type="usage">
+                  <span class="badge badge-unused">미사용</span>
+                </td>
+                <td>
+                  <div class="table-input-wrapper">
+                    <input type="text" class="table-input" placeholder="입력하세요" />
+                    <button class="table-input-clear"></button>
+                  </div>
+                </td>
+                <td>
+                  <button class="button button-xs button-outline-gray">삭제</button>
+                </td>
+              </tr>
+              <tr class="row-grey">
+                <td>09</td>
+                <td>AdminID</td>
+                <td data-filter-type="department">기술개발팀</td>
+                <td>김희진</td>
+                <td data-filter-type="authority">
+                  <div class="text-select-wrapper w-120">
+                    <button class="text-select-button down" type="button">
+                      총괄 관리자 <span class="icon"></span>
+                    </button>
+                    <ul class="text-select-options">
+                      <li class="selected">총괄 관리자</li>
+                      <li>관리자</li>
+                      <li>사용자</li>
+                    </ul>
+                  </div>
+                </td>
+                <td data-filter-type="usage">
+                  <span class="badge badge-used">사용</span>
+                </td>
+                <td>
+                  <div class="table-input-wrapper">
+                    <input type="text" class="table-input" placeholder="입력하세요" />
+                    <button class="table-input-clear"></button>
+                  </div>
+                </td>
+                <td>
+                  <button class="button button-xs button-outline-gray">삭제</button>
+                </td>
+              </tr>
+              <tr class="row-white">
+                <td>10</td>
+                <td>UserID</td>
+                <td data-filter-type="department">총무팀</td>
+                <td>홍길동</td>
+                <td data-filter-type="authority">
+                  <div class="text-select-wrapper w-120">
+                    <button class="text-select-button down" type="button">
+                      관리자 <span class="icon"></span>
+                    </button>
+                    <ul class="text-select-options">
+                      <li>총괄 관리자</li>
+                      <li class="selected">관리자</li>
+                      <li>사용자</li>
+                    </ul>
+                  </div>
+                </td>
+                <td data-filter-type="usage">
+                  <span class="badge badge-unused">미사용</span>
+                </td>
+                <td>
+                  <div class="table-input-wrapper">
+                    <input type="text" class="table-input" placeholder="입력하세요" />
+                    <button class="table-input-clear"></button>
+                  </div>
+                </td>
+                <td>
+                  <button class="button button-xs button-outline-gray">삭제</button>
+                </td>
+              </tr>
+
+              <!-- 임시 데이터 (퍼블리셔 시안 확인용 - 30개 행으로 3페이지 생성) -->
+              <tr class="row-grey"><td>11</td><td>user011</td><td data-filter-type="department">인사팀</td><td>김민수</td><td data-filter-type="authority"><div class="text-select-wrapper w-120"><button class="text-select-button down" type="button">사용자 <span class="icon"></span></button><ul class="text-select-options"><li>총괄 관리자</li><li>관리자</li><li class="selected">사용자</li></ul></div></td><td data-filter-type="usage"><span class="badge badge-used">사용</span></td><td><div class="table-input-wrapper"><input type="text" class="table-input" placeholder="입력하세요" /><button class="table-input-clear"></button></div></td><td><button class="button button-xs button-outline-gray">삭제</button></td></tr>
+              <tr class="row-white"><td>12</td><td>user012</td><td data-filter-type="department">총무팀</td><td>이지은</td><td data-filter-type="authority"><div class="text-select-wrapper w-120"><button class="text-select-button down" type="button">관리자 <span class="icon"></span></button><ul class="text-select-options"><li>총괄 관리자</li><li class="selected">관리자</li><li>사용자</li></ul></div></td><td data-filter-type="usage"><span class="badge badge-unused">미사용</span></td><td><div class="table-input-wrapper"><input type="text" class="table-input" placeholder="입력하세요" /><button class="table-input-clear"></button></div></td><td><button class="button button-xs button-outline-gray">삭제</button></td></tr>
+              <tr class="row-grey"><td>13</td><td>user013</td><td data-filter-type="department">기술개발팀</td><td>박지훈</td><td data-filter-type="authority"><div class="text-select-wrapper w-120"><button class="text-select-button down" type="button">사용자 <span class="icon"></span></button><ul class="text-select-options"><li>총괄 관리자</li><li>관리자</li><li class="selected">사용자</li></ul></div></td><td data-filter-type="usage"><span class="badge badge-used">사용</span></td><td><div class="table-input-wrapper"><input type="text" class="table-input" placeholder="입력하세요" /><button class="table-input-clear"></button></div></td><td><button class="button button-xs button-outline-gray">삭제</button></td></tr>
+              <tr class="row-white"><td>14</td><td>user014</td><td data-filter-type="department">마케팅팀</td><td>최수연</td><td data-filter-type="authority"><div class="text-select-wrapper w-120"><button class="text-select-button down" type="button">총괄 관리자 <span class="icon"></span></button><ul class="text-select-options"><li class="selected">총괄 관리자</li><li>관리자</li><li>사용자</li></ul></div></td><td data-filter-type="usage"><span class="badge badge-used">사용</span></td><td><div class="table-input-wrapper"><input type="text" class="table-input" placeholder="입력하세요" /><button class="table-input-clear"></button></div></td><td><button class="button button-xs button-outline-gray">삭제</button></td></tr>
+              <tr class="row-grey"><td>15</td><td>user015</td><td data-filter-type="department">인사팀</td><td>정민호</td><td data-filter-type="authority"><div class="text-select-wrapper w-120"><button class="text-select-button down" type="button">사용자 <span class="icon"></span></button><ul class="text-select-options"><li>총괄 관리자</li><li>관리자</li><li class="selected">사용자</li></ul></div></td><td data-filter-type="usage"><span class="badge badge-unused">미사용</span></td><td><div class="table-input-wrapper"><input type="text" class="table-input" placeholder="입력하세요" /><button class="table-input-clear"></button></div></td><td><button class="button button-xs button-outline-gray">삭제</button></td></tr>
+              <tr class="row-white"><td>16</td><td>user016</td><td data-filter-type="department">총무팀</td><td>강예린</td><td data-filter-type="authority"><div class="text-select-wrapper w-120"><button class="text-select-button down" type="button">관리자 <span class="icon"></span></button><ul class="text-select-options"><li>총괄 관리자</li><li class="selected">관리자</li><li>사용자</li></ul></div></td><td data-filter-type="usage"><span class="badge badge-used">사용</span></td><td><div class="table-input-wrapper"><input type="text" class="table-input" placeholder="입력하세요" /><button class="table-input-clear"></button></div></td><td><button class="button button-xs button-outline-gray">삭제</button></td></tr>
+              <tr class="row-grey"><td>17</td><td>user017</td><td data-filter-type="department">기술개발팀</td><td>윤태현</td><td data-filter-type="authority"><div class="text-select-wrapper w-120"><button class="text-select-button down" type="button">사용자 <span class="icon"></span></button><ul class="text-select-options"><li>총괄 관리자</li><li>관리자</li><li class="selected">사용자</li></ul></div></td><td data-filter-type="usage"><span class="badge badge-used">사용</span></td><td><div class="table-input-wrapper"><input type="text" class="table-input" placeholder="입력하세요" /><button class="table-input-clear"></button></div></td><td><button class="button button-xs button-outline-gray">삭제</button></td></tr>
+              <tr class="row-white"><td>18</td><td>user018</td><td data-filter-type="department">마케팅팀</td><td>한서영</td><td data-filter-type="authority"><div class="text-select-wrapper w-120"><button class="text-select-button down" type="button">관리자 <span class="icon"></span></button><ul class="text-select-options"><li>총괄 관리자</li><li class="selected">관리자</li><li>사용자</li></ul></div></td><td data-filter-type="usage"><span class="badge badge-unused">미사용</span></td><td><div class="table-input-wrapper"><input type="text" class="table-input" placeholder="입력하세요" /><button class="table-input-clear"></button></div></td><td><button class="button button-xs button-outline-gray">삭제</button></td></tr>
+              <tr class="row-grey"><td>19</td><td>user019</td><td data-filter-type="department">인사팀</td><td>오동혁</td><td data-filter-type="authority"><div class="text-select-wrapper w-120"><button class="text-select-button down" type="button">사용자 <span class="icon"></span></button><ul class="text-select-options"><li>총괄 관리자</li><li>관리자</li><li class="selected">사용자</li></ul></div></td><td data-filter-type="usage"><span class="badge badge-used">사용</span></td><td><div class="table-input-wrapper"><input type="text" class="table-input" placeholder="입력하세요" /><button class="table-input-clear"></button></div></td><td><button class="button button-xs button-outline-gray">삭제</button></td></tr>
+              <tr class="row-white"><td>20</td><td>user020</td><td data-filter-type="department">총무팀</td><td>신지우</td><td data-filter-type="authority"><div class="text-select-wrapper w-120"><button class="text-select-button down" type="button">관리자 <span class="icon"></span></button><ul class="text-select-options"><li>총괄 관리자</li><li class="selected">관리자</li><li>사용자</li></ul></div></td><td data-filter-type="usage"><span class="badge badge-unused">미사용</span></td><td><div class="table-input-wrapper"><input type="text" class="table-input" placeholder="입력하세요" /><button class="table-input-clear"></button></div></td><td><button class="button button-xs button-outline-gray">삭제</button></td></tr>
+              <tr class="row-grey"><td>21</td><td>user021</td><td data-filter-type="department">기술개발팀</td><td>배민정</td><td data-filter-type="authority"><div class="text-select-wrapper w-120"><button class="text-select-button down" type="button">사용자 <span class="icon"></span></button><ul class="text-select-options"><li>총괄 관리자</li><li>관리자</li><li class="selected">사용자</li></ul></div></td><td data-filter-type="usage"><span class="badge badge-used">사용</span></td><td><div class="table-input-wrapper"><input type="text" class="table-input" placeholder="입력하세요" /><button class="table-input-clear"></button></div></td><td><button class="button button-xs button-outline-gray">삭제</button></td></tr>
+              <tr class="row-white"><td>22</td><td>user022</td><td data-filter-type="department">마케팅팀</td><td>임예린</td><td data-filter-type="authority"><div class="text-select-wrapper w-120"><button class="text-select-button down" type="button">총괄 관리자 <span class="icon"></span></button><ul class="text-select-options"><li class="selected">총괄 관리자</li><li>관리자</li><li>사용자</li></ul></div></td><td data-filter-type="usage"><span class="badge badge-used">사용</span></td><td><div class="table-input-wrapper"><input type="text" class="table-input" placeholder="입력하세요" /><button class="table-input-clear"></button></div></td><td><button class="button button-xs button-outline-gray">삭제</button></td></tr>
+              <tr class="row-grey"><td>23</td><td>user023</td><td data-filter-type="department">인사팀</td><td>조준호</td><td data-filter-type="authority"><div class="text-select-wrapper w-120"><button class="text-select-button down" type="button">사용자 <span class="icon"></span></button><ul class="text-select-options"><li>총괄 관리자</li><li>관리자</li><li class="selected">사용자</li></ul></div></td><td data-filter-type="usage"><span class="badge badge-unused">미사용</span></td><td><div class="table-input-wrapper"><input type="text" class="table-input" placeholder="입력하세요" /><button class="table-input-clear"></button></div></td><td><button class="button button-xs button-outline-gray">삭제</button></td></tr>
+              <tr class="row-white"><td>24</td><td>user024</td><td data-filter-type="department">총무팀</td><td>황수연</td><td data-filter-type="authority"><div class="text-select-wrapper w-120"><button class="text-select-button down" type="button">관리자 <span class="icon"></span></button><ul class="text-select-options"><li>총괄 관리자</li><li class="selected">관리자</li><li>사용자</li></ul></div></td><td data-filter-type="usage"><span class="badge badge-used">사용</span></td><td><div class="table-input-wrapper"><input type="text" class="table-input" placeholder="입력하세요" /><button class="table-input-clear"></button></div></td><td><button class="button button-xs button-outline-gray">삭제</button></td></tr>
+              <tr class="row-grey"><td>25</td><td>user025</td><td data-filter-type="department">기술개발팀</td><td>송민호</td><td data-filter-type="authority"><div class="text-select-wrapper w-120"><button class="text-select-button down" type="button">사용자 <span class="icon"></span></button><ul class="text-select-options"><li>총괄 관리자</li><li>관리자</li><li class="selected">사용자</li></ul></div></td><td data-filter-type="usage"><span class="badge badge-used">사용</span></td><td><div class="table-input-wrapper"><input type="text" class="table-input" placeholder="입력하세요" /><button class="table-input-clear"></button></div></td><td><button class="button button-xs button-outline-gray">삭제</button></td></tr>
+              <tr class="row-white"><td>26</td><td>user026</td><td data-filter-type="department">마케팅팀</td><td>노지은</td><td data-filter-type="authority"><div class="text-select-wrapper w-120"><button class="text-select-button down" type="button">관리자 <span class="icon"></span></button><ul class="text-select-options"><li>총괄 관리자</li><li class="selected">관리자</li><li>사용자</li></ul></div></td><td data-filter-type="usage"><span class="badge badge-unused">미사용</span></td><td><div class="table-input-wrapper"><input type="text" class="table-input" placeholder="입력하세요" /><button class="table-input-clear"></button></div></td><td><button class="button button-xs button-outline-gray">삭제</button></td></tr>
+              <tr class="row-grey"><td>27</td><td>user027</td><td data-filter-type="department">인사팀</td><td>문태현</td><td data-filter-type="authority"><div class="text-select-wrapper w-120"><button class="text-select-button down" type="button">사용자 <span class="icon"></span></button><ul class="text-select-options"><li>총괄 관리자</li><li>관리자</li><li class="selected">사용자</li></ul></div></td><td data-filter-type="usage"><span class="badge badge-used">사용</span></td><td><div class="table-input-wrapper"><input type="text" class="table-input" placeholder="입력하세요" /><button class="table-input-clear"></button></div></td><td><button class="button button-xs button-outline-gray">삭제</button></td></tr>
+              <tr class="row-white"><td>28</td><td>user028</td><td data-filter-type="department">총무팀</td><td>서예린</td><td data-filter-type="authority"><div class="text-select-wrapper w-120"><button class="text-select-button down" type="button">총괄 관리자 <span class="icon"></span></button><ul class="text-select-options"><li class="selected">총괄 관리자</li><li>관리자</li><li>사용자</li></ul></div></td><td data-filter-type="usage"><span class="badge badge-used">사용</span></td><td><div class="table-input-wrapper"><input type="text" class="table-input" placeholder="입력하세요" /><button class="table-input-clear"></button></div></td><td><button class="button button-xs button-outline-gray">삭제</button></td></tr>
+              <tr class="row-grey"><td>29</td><td>user029</td><td data-filter-type="department">기술개발팀</td><td>안동혁</td><td data-filter-type="authority"><div class="text-select-wrapper w-120"><button class="text-select-button down" type="button">사용자 <span class="icon"></span></button><ul class="text-select-options"><li>총괄 관리자</li><li>관리자</li><li class="selected">사용자</li></ul></div></td><td data-filter-type="usage"><span class="badge badge-unused">미사용</span></td><td><div class="table-input-wrapper"><input type="text" class="table-input" placeholder="입력하세요" /><button class="table-input-clear"></button></div></td><td><button class="button button-xs button-outline-gray">삭제</button></td></tr>
+              <tr class="row-white"><td>30</td><td>user030</td><td data-filter-type="department">마케팅팀</td><td>유지우</td><td data-filter-type="authority"><div class="text-select-wrapper w-120"><button class="text-select-button down" type="button">관리자 <span class="icon"></span></button><ul class="text-select-options"><li>총괄 관리자</li><li class="selected">관리자</li><li>사용자</li></ul></div></td><td data-filter-type="usage"><span class="badge badge-used">사용</span></td><td><div class="table-input-wrapper"><input type="text" class="table-input" placeholder="입력하세요" /><button class="table-input-clear"></button></div></td><td><button class="button button-xs button-outline-gray">삭제</button></td></tr>
+
+            </tbody>
+          </table>
+          <div class="pagination">
+            <button class="page-btn prev"></button>
+            <button class="page-btn active">01</button>
+            <button class="page-btn">02</button>
+            <button class="page-btn">03</button>
+            <button class="page-btn">04</button>
+            <button class="page-btn">05</button>
+            <button class="page-btn next"></button>
+          </div>
+        </div>
+
+        <!-- 저장 버튼 -->
+        <div class="content-bottom-actions">
+          <button class="button button-l button-primary" type="button" id="saveBtn">
+            <span>저장</span>
+          </button>
+        </div>
+
+      </main>
+    </div>
+
+  </div>
+
+  <!-- 부서별 상세 모달 -->
+  <div class="modal-overlay modal-hidden" id="departmentModal">
+    <div class="modal-container" style="width: 600px;">
+      <!-- 모달 헤더 -->
+      <div class="modal-header">
+        <h4 id="modalTitle">부서 상세 정보</h4>
+      </div>
+
+      <!-- 모달 콘텐츠 -->
+      <div class="modal-content" id="modalContent">
+        <!-- ✅ 개발자가 이 영역에 HTML을 동적으로 삽입합니다. -->
+        <div class="modal-loading">불러오는 중...</div>
+      </div>
+
+      <!-- 모달 푸터 -->
+      <div class="modal-footer">
+        <button class="button button-l button-secondary" onclick="closeDepartmentModal()">취소</button>
+        <button class="button button-l button-primary" onclick="closeDepartmentModal()">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 권한 변경 확인 모달 -->
+  <div class="modal-overlay modal-hidden" id="authorityChangeModal">
+    <div class="modal-container" style="width: 400px;">
+      <!-- 모달 헤더 -->
+      <div class="modal-header">
+        <h4>권한 변경</h4>
+      </div>
+
+      <!-- 모달 콘텐츠 -->
+      <div class="modal-content">
+        <p id="authorityChangeMessage">권한을 000에서 000으로 변경하시겠습니까?</p>
+      </div>
+
+      <!-- 모달 푸터 -->
+      <div class="modal-footer">
+        <button class="button button-l button-secondary" onclick="closeAuthorityChangeModal()">취소</button>
+        <button class="button button-l button-primary" onclick="confirmAuthorityChange()">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 삭제 확인 모달 -->
+  <div class="modal-overlay modal-hidden" id="deleteConfirmModal">
+    <div class="modal-container" style="width: 400px;">
+      <!-- 모달 헤더 -->
+      <div class="modal-header">
+        <h4>확인</h4>
+      </div>
+
+      <!-- 모달 콘텐츠 -->
+      <div class="modal-content">
+        <p>삭제를 하시겠습니까?</p>
+      </div>
+
+      <!-- 모달 푸터 -->
+      <div class="modal-footer">
+        <button class="button button-l button-secondary" onclick="closeDeleteConfirmModal()">취소</button>
+        <button class="button button-l button-primary" onclick="confirmDelete()">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 토스트 팝업 -->
+  <div class="toast-popup" id="toastPopup">
+    <span id="toastMessage">메시지</span>
+  </div>
+
+  
+
+  <script src="js/main.js"></script>
+  <script>
+    // sub_04.html 초기화
+    document.addEventListener('DOMContentLoaded', function() {
+      // 테이블 필터링 시스템 초기화
+      initTableFiltering('user');
+    });
+  </script>
+</body>
+
+</html>

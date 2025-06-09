@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>식수관리 - 시스템 설정</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <link rel="stylesheet" href="./css/layout.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+
+<body>
+  <div class="layout">
+    <!--header-->
+    <header class="layout-header">
+      <div class="header-title">식수관리시스템</div>
+      <button class="btn-logout" title="로그아웃"></button>
+    </header>
+    <!--lnb+contents-->
+    <div class="layout-main">
+      <!--lnb-->
+      <aside class="layout-lnb">
+        <ul class="lnb-menu">
+          <li class="lnb-item">
+            <a href="sub_01.html" class="lnb-button">대시 보드</a>
+          </li>
+          <li class="lnb-item">
+            <a href="sub_02.html" class="lnb-button">식사 관리</a>
+          </li>
+          <li class="lnb-item">
+            <a href="sub_03.html" class="lnb-button">정산 관리</a>
+          </li>
+          <li class="lnb-item">
+            <a href="sub_04.html" class="lnb-button">사용자 관리</a>
+          </li>
+          <li class="lnb-item">
+            <a href="sub_05.html" class="lnb-button active">시스템 설정</a>
+          </li>
+        </ul>
+      </aside>
+
+      <!--Contents-->
+      <main class="layout-content">
+        
+
+        <!-- 식사 시간 관리 섹션 -->
+        <section class="system-settings-section">
+          <h2 class="section-title">식사 시간 관리</h2>
+
+          <div class="meal-time-grid">
+            <!-- 조식 -->
+            <div class="meal-time-item">
+              <div class="meal-time-header">
+                <div class="meal-type-info">
+                  <span class="meal-type-label">조식</span>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="time-inputs">
+                <div class="time-input-group">
+                    <div class="time-picker">
+                        <button class="time-input">오전 06:00</button>
+                        <div class="time-dropdown">
+                          <div class="time-options">
+                            <ul class="ampm-column"></ul>
+                            <ul class="hour-column"></ul>
+                            <ul class="minute-column"></ul>
+                          </div>
+                          <div class="time-footer">
+                            <button class="button button-xs button-base-outline button-outline-gray time-cancel-btn">취소</button>
+                            <button class="button button-xs button-base-outline button-outline-gray time-confirm-btn">확인</button>
+                          </div>
+                        </div>
+                    </div>
+                  <span class="time-separator">-</span>
+                  <div class="time-picker">
+                    <button class="time-input">오전 06:00</button>
+                    <div class="time-dropdown">
+                      <div class="time-options">
+                        <ul class="ampm-column"></ul>
+                        <ul class="hour-column"></ul>
+                        <ul class="minute-column"></ul>
+                      </div>
+                      <div class="time-footer">
+                        <button class="button button-xs button-base-outline button-outline-gray time-cancel-btn">취소</button>
+                        <button class="button button-xs button-base-outline button-outline-gray time-confirm-btn">확인</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="meal-info">
+                <div class="meal-info-header">
+                  <h3 class="meal-info-title">시간 예약</h3>
+                  <button class="button button-xs button-secondary" type="button" onclick="openTimeModal()">
+                    <span>설정</span>
+                  </button>
+                </div>
+                <div class="meal-info-content">
+                  <div class="info-row">
+                    <div class="info-row-left">
+                      <img src="./images/ic_calender_24.png" alt="날짜 아이콘" class="info-icon">
+                      <span class="info-label">적용 날짜</span>
+                    </div>
+                    <span class="info-value">2025.06.09</span>
+                  </div>
+                  <div class="info-row">
+                    <div class="info-row-left">
+                      <img src="./images/ic_time_24.png" alt="시간 아이콘" class="info-icon">
+                      <span class="info-label">적용 시간</span>
+                    </div>
+                    <span class="info-value">06:00</span>
+                  </div>
+                  <div class="info-row">
+                    <div class="info-row-left">
+                      <img src="./images/ic_meal_24.png" alt="식사 아이콘" class="info-icon">
+                      <span class="info-label">식사 시간</span>
+                    </div>
+                    <span class="info-value">07:00 - 08:00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 중식 -->
+            <div class="meal-time-item">
+              <div class="meal-time-header">
+                <div class="meal-type-info">
+                  <span class="meal-type-label">중식</span>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="time-inputs">
+                <div class="time-input-group">
+                    <div class="time-picker">
+                        <button class="time-input">오전 06:00</button>
+                        <div class="time-dropdown">
+                          <div class="time-options">
+                            <ul class="ampm-column"></ul>
+                            <ul class="hour-column"></ul>
+                            <ul class="minute-column"></ul>
+                          </div>
+                          <div class="time-footer">
+                            <button class="button button-xs button-base-outline button-outline-gray time-cancel-btn">취소</button>
+                            <button class="button button-xs button-base-outline button-outline-gray time-confirm-btn">확인</button>
+                          </div>
+                        </div>
+                    </div>
+                  <span class="time-separator">-</span>
+                  <div class="time-picker">
+                    <button class="time-input">오전 06:00</button>
+                    <div class="time-dropdown">
+                      <div class="time-options">
+                        <ul class="ampm-column"></ul>
+                        <ul class="hour-column"></ul>
+                        <ul class="minute-column"></ul>
+                      </div>
+                      <div class="time-footer">
+                        <button class="time-cancel-btn">취소</button>
+                        <button class="time-confirm-btn">확인</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="meal-info">
+                <div class="meal-info-header">
+                  <h3 class="meal-info-title">시간 예약</h3>
+                  <button class="button button-xs button-secondary" type="button" onclick="openTimeModal()">
+                    <span>설정</span>
+                  </button>
+                </div>
+                <div class="meal-info-content">
+                  <div class="info-row no-reservation">
+                    <span class="info-value">예약이 없습니다.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 석식 -->
+            <div class="meal-time-item">
+              <div class="meal-time-header">
+                <div class="meal-type-info">
+                  <span class="meal-type-label">석식</span>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="time-inputs">
+                <div class="time-input-group">
+                    <div class="time-picker">
+                        <button class="time-input">오전 06:00</button>
+                        <div class="time-dropdown">
+                          <div class="time-options">
+                            <ul class="ampm-column"></ul>
+                            <ul class="hour-column"></ul>
+                            <ul class="minute-column"></ul>
+                          </div>
+                          <div class="time-footer">
+                            <button class="button button-xs button-base-outline button-outline-gray time-cancel-btn">취소</button>
+                            <button class="button button-xs button-base-outline button-outline-gray time-confirm-btn">확인</button>
+                          </div>
+                        </div>
+                    </div>
+                  <span class="time-separator">-</span>
+                  <div class="time-picker">
+                    <button class="time-input">오전 06:00</button>
+                    <div class="time-dropdown">
+                      <div class="time-options">
+                        <ul class="ampm-column"></ul>
+                        <ul class="hour-column"></ul>
+                        <ul class="minute-column"></ul>
+                      </div>
+                      <div class="time-footer">
+                        <button class="button button-xs button-base-outline button-outline-gray time-cancel-btn">취소</button>
+                        <button class="button button-xs button-base-outline button-outline-gray time-confirm-btn">확인</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="meal-info">
+                <div class="meal-info-header">
+                  <h3 class="meal-info-title">시간 예약</h3>
+                  <button class="button button-xs button-secondary" type="button" onclick="openTimeModal()">
+                    <span>설정</span>
+                  </button>
+                </div>
+                <div class="meal-info-content">
+                  <div class="info-row no-reservation">
+                    <span class="info-value">예약이 없습니다.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 야식 -->
+            <div class="meal-time-item disabled">
+              <div class="meal-time-header">
+                <div class="meal-type-info">
+                  <span class="meal-type-label">야식</span>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="time-inputs">
+                <div class="time-input-group">
+                    <div class="time-picker">
+                        <button class="time-input">오전 06:00</button>
+                        <div class="time-dropdown">
+                          <div class="time-options">
+                            <ul class="ampm-column"></ul>
+                            <ul class="hour-column"></ul>
+                            <ul class="minute-column"></ul>
+                          </div>
+                          <div class="time-footer">
+                            <button class="button button-xs button-base-outline button-outline-gray time-cancel-btn">취소</button>
+                            <button class="button button-xs button-base-outline button-outline-gray time-confirm-btn">확인</button>
+                          </div>
+                        </div>
+                    </div>
+                  <span class="time-separator">-</span>
+                  <div class="time-picker">
+                    <button class="time-input">오전 06:00</button>
+                    <div class="time-dropdown">
+                      <div class="time-options">
+                        <ul class="ampm-column"></ul>
+                        <ul class="hour-column"></ul>
+                        <ul class="minute-column"></ul>
+                      </div>
+                      <div class="time-footer">
+                        <button class="button button-xs button-base-outline button-outline-gray time-cancel-btn">취소</button>
+                        <button class="button button-xs button-base-outline button-outline-gray time-confirm-btn">확인</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="meal-info">
+                <div class="meal-info-header">
+                  <h3 class="meal-info-title">시간 예약</h3>
+                  <button class="button button-xs button-secondary" type="button" onclick="openTimeModal()">
+                    <span>설정</span>
+                  </button>
+                </div>
+                <div class="meal-info-content">
+                  <div class="info-row no-reservation">
+                    <span class="info-value">예약이 없습니다.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+
+        <!-- 식사 인증 방식 섹션 -->
+        <section class="system-settings-section">
+          <h2 class="section-title">식사 인증 방식</h2>
+
+          <div class="auth-methods">
+            <label class="checkbox auth-method-item">
+              <input type="checkbox" checked>
+              <span class="custom-checkbox"></span>
+              <span class="auth-method-label">카드</span>
+            </label>
+
+            <label class="checkbox auth-method-item">
+              <input type="checkbox" checked>
+              <span class="custom-checkbox"></span>
+              <span class="auth-method-label">얼굴</span>
+            </label>
+
+            <label class="checkbox auth-method-item">
+              <input type="checkbox" checked>
+              <span class="custom-checkbox"></span>
+              <span class="auth-method-label">QR</span>
+            </label>
+
+            <label class="checkbox auth-method-item">
+              <input type="checkbox" checked>
+              <span class="custom-checkbox"></span>
+              <span class="auth-method-label">지문</span>
+            </label>
+          </div>
+        </section>
+
+        <!-- 저장 버튼 -->
+        <div class="content-bottom-actions">
+          <button class="button button-l button-primary" type="button" id="saveBtn">
+            <span>저장</span>
+          </button>
+        </div>
+
+      </main>
+    </div>
+  </div>
+  <script src="js/main.js"></script>
+  <script>
+    // 토글 스위치 기능
+    document.addEventListener('DOMContentLoaded', function() {
+      // 모든 토글 스위치에 이벤트 리스너 추가
+      const toggleSwitches = document.querySelectorAll('.toggle-switch input[type="checkbox"]');
+
+      toggleSwitches.forEach(function(toggle) {
+        toggle.addEventListener('change', function() {
+          const card = this.closest('.meal-time-item');
+
+          if (this.checked) {
+            // ON: 카드 활성화
+            card.classList.remove('disabled');
+          } else {
+            // OFF: 카드 비활성화
+            card.classList.add('disabled');
+          }
+        });
+      });
+    });
+
+    // 모달 팝업 함수들
+    function openTimeModal() {
+      alert('시간 설정 모달이 열립니다.');
+      // 실제 구현에서는 모달 팝업을 여는 코드를 작성
+    }
+
+
+  </script>
+</body>
+
+</html>
