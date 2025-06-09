@@ -1,0 +1,238 @@
+/* ========== Layout Wrapper ========== */
+.layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: var(--neutral-100);
+    font-family: 'Pretendard', sans-serif;
+}
+
+/* ========== Header ========== */
+.layout-header {
+  height: 60px;
+  background-color: var(--color-primary-default);
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 좌우 끝 정렬 */
+  padding: 0 24px;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 500;
+  color: var(--color-white);
+  flex-shrink: 0;
+}
+
+.header-title {
+  flex: 1;
+}
+
+.btn-logout {
+  width: 48px;
+  height: 48px;
+  background: url('../images/ic_logout_48.png') no-repeat center / contain;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+/* ========== Main (LNB + Content) ========== */
+.layout-main {
+    display: flex;
+    flex: 1; /* 헤더 제외 전체 채움 */
+    overflow: hidden;
+}
+
+ /* ========== LNB ========== */
+.layout-lnb {
+    width: 240px;
+    background-color: #fff;
+    border-right: 1px solid #E0E0E0;
+    padding: 24px 12px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+/* ========== Content ========== */
+.layout-content {
+    flex: 1;
+    padding: 40px 30px;
+    background-color: var(--neutral-100);
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+
+/* ========== LNB 메뉴 공통 ========== */
+.lnb-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.lnb-item {
+  margin-bottom: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* button, a 공통 스타일 */
+button.lnb-button,
+a.lnb-button {
+  width: 100%;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  padding: 14px 12px;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+/* hover */
+button.lnb-button:hover,
+a.lnb-button:hover {
+  background-color: var(--neutral-100);
+}
+
+/* active */
+button.lnb-button.active,
+a.lnb-button.active {
+  background-color: var(--color-tertiary-default);
+  color: var(--color-primary-default);
+}
+
+/* 아이콘 공통 */
+.lnb-button .icon {
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px;
+  flex-shrink: 0;
+}
+
+/* 아이콘 상태 */
+.lnb-button.active .icon {
+  background-image: url('../images/ic_lnb_add_20.png');
+}
+.lnb-button:not(.active) .icon {
+  background-image: url('../images/ic_lnb_minus_20.png');
+}
+
+/* 하위 메뉴 */
+.lnb-submenu {
+  margin-left: 16px;
+  list-style: none;
+  margin-top: 8px;
+  padding-left: 4px;
+  border-left: 1px solid #E7E7E7;
+  display: none;
+}
+
+.lnb-submenu .submenu-item {
+  display: block;
+  font-size: 16px;
+  color: var(--color-black);
+  padding: 8px 8px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* hover 시 색상 변경 */
+.lnb-submenu .submenu-item:hover {
+  color: var(--neutral-700);
+  text-decoration: none;
+}
+
+/* 현재 선택된 항목 강조 */
+.lnb-submenu .submenu-item.on {
+  color: var(--color-primary-default);
+  text-decoration: none;
+}
+
+
+/* ========== Contents header ========== */
+/* 전체 그룹 수평 정렬 */
+.search-group-container {
+  display: flex;
+  justify-content: space-between; /* 좌우 끝 정렬 */
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 10px; /* 원하는 만큼 조절 */
+}
+
+/* 각 그룹 내부 요소 수평 정렬 */
+.search-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.search-group > p {
+  margin: 0;
+}
+
+/* 좌측 그룹 (검색 등) */
+.search-left {
+  flex: 1 1 auto;
+}
+
+/* 우측 그룹 (셀렉트 + 버튼들) */
+.search-right {
+  flex-shrink: 0;
+  flex-wrap: nowrap; /* 줄바꿈 방지 */
+  gap: 16px;
+}
+
+/* 두 번째 줄 별도 마진 */
+.search-group-container--second {
+  margin-bottom: 16px; /* ← 원하는 값 */
+  width: 100%;
+}
+
+/* 세 번째 줄 별도 마진 지정 */
+.search-group-container--third {
+  margin-bottom: 4px; /* ← 여기서 조정 */
+  width: 100%;
+}
+
+
+/* 0번째 줄 */
+.search-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px; /* 아래 여백 */
+}
+
+.search-section-header-text {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--color-black);
+}
+
+
+/* ========== 부서명 클릭 가능 스타일 ========== */
+.department-clickable {
+  color: var(--color-primary-default);
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.department-clickable:hover {
+  color: var(--color-primary-hover);
+  text-decoration: none;
+}
+
